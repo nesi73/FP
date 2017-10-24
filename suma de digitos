@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+int leernumpositivo();
+int sumadigitos(int numero);
+void mostraresultado(int resultado);
+
+int main() //declaracion de funciones
+{
+	int numero,resultado;
+	numero = leernumpositivo();
+	resultado = sumadigitos(numero);
+	mostraresultado(resultado);
+	system("pause");
+	return 0;
+}
+	int leernumpositivo()
+	{
+		int n;
+		cout << "Escribe un numero entero: " << endl;
+		cin >> n;
+		while (n < 0)
+		{
+			cout << "Escribe un numero entero: " << endl;
+			cin >> n;
+		}
+		return n;
+	}
+
+	int sumadigitos(int numero)
+	{
+		int e=0;
+		while (numero > 0)
+		{
+			e = e + (numero % 10);
+			numero = numero / 10;
+
+		}
+		return e;
+	}
+
+	void mostraresultado(int resultado)
+	{
+		cout << "el resultado es: " << resultado << endl;
+	}
