@@ -1,0 +1,41 @@
+      .extern _stack
+      .global start
+      .equ longA, 4
+      .bss
+A:    .space longA*4
+
+      .text
+start:
+      ldr sp, =_stack
+      mov fp, #0
+      ldr r0, =A @Array
+      mov r1, #longA @LongitudArray
+      bl max
+      b .
+
+max:
+      push{r4-r8,fp,lr}
+      mov r4, r0 @Array movido a r4
+      mov r5, r1 @Longitud movida a r5
+      mov r6, #0 @ max
+      mov r7, #0 @ind
+      mov r8, #0 @i
+for:
+      cmp r8, r5
+      bge fin
+      ldr r0, [r4, r8, lsl #2] @componente del Array
+      cmp r0, r6
+      bgt salto
+si:   add r8, r8, #1
+      b for
+
+salto:
+      mov r6, r0
+      mov r7, r8
+      b si
+
+fin:
+      mov r0, r7
+      pop{r4-r8,fp,lr}
+      mov pc, lr
+      .end
